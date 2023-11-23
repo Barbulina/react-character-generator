@@ -1,0 +1,13 @@
+.character-list {
+  background-color: red;
+  &__title{
+    text-align: center;
+  }
+  &__body{
+
+  }
+  &__actions{
+   text-align: center;
+    background-color: black;
+  }
+}
