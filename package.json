@@ -14,13 +14,14 @@
 		"start": "vite --port 3000 --open",
 		"build": "vite build",
 		"test": "jest --watch --config=jest.config.js",
+		"test:ci": "jest --ci --config=jest.config.js",
 		"cy:open": "cypress open",
 		"cy:run": "cypress run",
 		"lint": "eslint --ignore-path .gitignore . && stylelint **/*.scss",
 		"lint:fix": "eslint --fix --ignore-path .gitignore . && stylelint --fix **/*.scss",
 		"preview": "vite preview",
 		"prepare": "husky install",
-		"prepush": "npm run lint:fix && npm run test"
+		"prepush": "npm run lint:fix && npm run test:ci"
 	},
 	"eslintConfig": {
 		"extends": [
