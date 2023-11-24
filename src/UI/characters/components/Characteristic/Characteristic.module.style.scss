@@ -1,0 +1,16 @@
+.characteristic {
+  &__label {
+    font-weight: bold;
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+
+  &__value {
+    font-weight: bold;
+    text-align: center;
+  }
+
+  &__mod {
+    font-size: 10px;
+  }
+}

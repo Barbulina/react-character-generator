@@ -1,0 +1,19 @@
+{
+	"editor.codeActionsOnSave": {
+		"source.fixAll": true,
+		"source.fixAll.stylelint": false,
+		"source.organizeImports": false
+	},
+	"stylelint.snippet": [
+		"css",
+		"less",
+		"postcss",
+		"scss"
+	],
+	"stylelint.validate": [
+		"css",
+		"less",
+		"postcss",
+		"scss"
+	]
+}

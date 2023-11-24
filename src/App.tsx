@@ -1,17 +1,26 @@
-import { UserCard } from "./sections/users/UserCard";
-import { useUsers } from "./sections/users/useUsers";
+import { Route } from "wouter";
+
+import createCharacteristicRepository from "./modules/character/infractructure/repository/characteristicRepository/characteristicRepository";
+import createCharacterLocalStorageRepository from "./modules/character/infractructure/repository/characterRepository/characterRepository";
+import { CharactersContextProvider } from "./UI/characters/CharacterContext";
+import { CreateCharacter } from "./UI/characters/pages/create/Create";
+import { CharacterList } from "./UI/characters/pages/list/List";
 
 export function App() {
-	const users = useUsers();
+	const characterRepository = createCharacterLocalStorageRepository();
+	const characteristicRepository = createCharacteristicRepository();
 
 	return (
 		<div className="App">
-			<h3>⚡⚛️ Vite React Best Practices Template (by Codely)</h3>
-			<h2>Current users</h2>
-
-			{users.map((user) => (
-				<UserCard key={user.name} user={user} />
-			))}
+			<h1>OSR</h1>
+			<CharactersContextProvider
+				characteristicsRepository={characteristicRepository}
+				characterRepository={characterRepository}
+			>
+				<Route path="/" component={CharacterList} />
+				<Route path="/characters-list" component={CharacterList} />
+				<Route path="/character-creator" component={CreateCharacter} />
+			</CharactersContextProvider>
 		</div>
 	);
 }
