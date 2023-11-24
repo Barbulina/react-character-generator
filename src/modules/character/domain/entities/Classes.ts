@@ -1,4 +1,4 @@
-import Character from "./character/Character";
+import Character, { CharacterConstructor } from "./character/Character";
 import { Cleric } from "./character/Cleric";
 import { Dwarf } from "./character/Dwarf";
 import { Elf } from "./character/Elf";
@@ -21,7 +21,7 @@ export type AvailableClassType = Character | Cleric | Dwarf | Fighter | Ranger |
 
 export const classesDictionary: Record<
 	ClassesEnum,
-	new (character: Character) => AvailableClassType
+	new (character: CharacterConstructor) => AvailableClassType
 > = {
 	[ClassesEnum.CLERIC]: Cleric,
 	[ClassesEnum.DWARF]: Dwarf,
