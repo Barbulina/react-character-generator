@@ -1,13 +1,16 @@
 .character-list {
   background-color: red;
-  &__title{
+
+  &__title {
     text-align: center;
   }
-  &__body{
 
+  &__body {
+    background-color: salmon;
   }
-  &__actions{
-   text-align: center;
+
+  &__actions {
+    text-align: center;
     background-color: black;
   }
 }

@@ -19,30 +19,30 @@ export interface IAlignment {
 }
 
 export default class Character {
-	public hitDice: number;
-	public label: string;
-	public class: string;
-	public mainCharacteristic: Array<string>;
-	public maxLevel: number | null;
-	public requirement: Array<IRequirement> | null;
-	public savingThrows: SavingThrows;
-	public id: string;
+	hitDice?: number;
+	label?: string;
+	class?: string;
+	mainCharacteristic?: Array<string>;
+	maxLevel?: number | null;
+	requirement?: Array<IRequirement> | null;
+	savingThrows?: SavingThrows;
+	id?: string;
+	characteristic: Array<CharacterCharacteristic>;
+	name: string;
 
-	private readonly alignment: string;
-	private readonly characteristic: Array<CharacterCharacteristic>;
-	private readonly dicesResults: Array<number>;
-	private readonly hitPoint: number;
-	private readonly name: string;
-	private readonly player: string;
-	private readonly origin: string;
-	private readonly height: number;
-	private readonly weight: number;
-	private readonly sex: string;
-	private readonly age: string;
-	private readonly hair: string;
-	private readonly eyes: string;
-	private readonly marks: string;
-	private readonly level: number;
+	private readonly alignment?: string;
+	private readonly dicesResults?: Array<number>;
+	private readonly hitPoint?: number;
+	private readonly player?: string;
+	private readonly origin?: string;
+	private readonly height?: number;
+	private readonly weight?: number;
+	private readonly sex?: string;
+	private readonly age?: string;
+	private readonly hair?: string;
+	private readonly eyes?: string;
+	private readonly marks?: string;
+	private readonly level?: number;
 
 	constructor(character: Character) {
 		this.id = character.id;
@@ -69,6 +69,23 @@ export default class Character {
 		this.maxLevel = character.maxLevel;
 		this.requirement = character.requirement;
 		this.savingThrows = character.savingThrows;
+	}
+
+	canBeClass?(): boolean {
+		let canBeClass = true;
+		if (!this.requirement) {
+			return canBeClass;
+		}
+		this.requirement.forEach((requirement: IRequirement) => {
+			const characteristicToCompare: CharacterCharacteristic | undefined = this.characteristic.find(
+				(item) => item.id === requirement.characteristic
+			);
+			if (characteristicToCompare && requirement.minValue > characteristicToCompare.value) {
+				canBeClass = false;
+			}
+		});
+
+		return canBeClass;
 	}
 
 	// TODO Move to useCases

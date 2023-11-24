@@ -1,4 +1,4 @@
-import Character, { CharacterCharacteristic } from "../../domain/entities/character/Character";
+import { CharacterCharacteristic } from "../../domain/entities/character/Character";
 import { AvailableClassType, classesDictionary, ClassesEnum } from "../../domain/entities/Classes";
 
 export default function getClassesList(
@@ -15,7 +15,7 @@ export default function getClassesList(
 				id: "some-id",
 				name: "no-name",
 				characteristic: characterCharacteristic,
-			}) as Character;
+			});
 
 			classesList.push(classInstance);
 		}
