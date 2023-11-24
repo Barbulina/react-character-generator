@@ -6,12 +6,16 @@ import { AvailableClassType } from "../../../../modules/character/domain/entitie
 
 export default function ClassSelector({
 	characteristics,
+	onSelectedClass,
 }: {
 	characteristics: CharacterCharacteristic[];
+	onSelectedClass: (characterClass: AvailableClassType) => void;
 }) {
 	const classesToSelect: AvailableClassType[] = getClassesList(characteristics);
 	const handleSelectClass = (classSelected: AvailableClassType) => {
-		return classSelected;
+		if (classSelected.canBeClass && classSelected.canBeClass()) {
+			onSelectedClass(classSelected);
+		}
 	};
 
 	return (
@@ -26,7 +30,7 @@ export default function ClassSelector({
 						key={classToSelect.label}
 						style={{ color: canBeSelected ? "blue" : "red" }}
 					>
-						{classToSelect.label} Can be select = {canBeSelected}
+						{classToSelect.label}
 					</div>
 				);
 			})}

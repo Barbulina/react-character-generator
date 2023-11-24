@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 
 import createCharacteristicsValues from "../../../../modules/character/application/useCases/createCharacteristicsValues";
 import { CharacterCharacteristic } from "../../../../modules/character/domain/entities/character/Character";
+import { AvailableClassType } from "../../../../modules/character/domain/entities/Classes";
 import { useCharactersContext } from "../../CharacterContext";
 import { Characteristics } from "../../components/Characteristics/Characteristics";
 import ClassSelector from "../../components/ClassrSelector/ClassSelector";
@@ -11,6 +12,7 @@ export function CreateCharacter() {
 	const { createCharacter, characteristics } = useCharactersContext();
 	const [location, setLocation] = useLocation();
 	const [characteristicsValues, setCharacteristicsValues] = useState<CharacterCharacteristic[]>([]);
+	const [characterClass, setCharacterClass] = useState<AvailableClassType>();
 
 	const handleOnCreateCharacteristicsValues = () => {
 		setCharacteristicsValues(createCharacteristicsValues(characteristics));
@@ -26,6 +28,10 @@ export function CreateCharacter() {
 		}
 	};
 
+	const handleOnSelectedClass = (characterClass: AvailableClassType) => {
+		setCharacterClass(characterClass);
+	};
+
 	return (
 		<section className="create-character">
 			<h2>Create character</h2>
@@ -37,7 +43,14 @@ export function CreateCharacter() {
 			</article>
 			{Boolean(characteristicsValues.length > 0) && (
 				<article>
-					<ClassSelector characteristics={characteristicsValues} />
+					{characterClass ? (
+						characterClass.label
+					) : (
+						<ClassSelector
+							characteristics={characteristicsValues}
+							onSelectedClass={handleOnSelectedClass}
+						/>
+					)}
 				</article>
 			)}
 			<article>{/* <button onClick={() => handleOnCreate()}>create</button> */}</article>
