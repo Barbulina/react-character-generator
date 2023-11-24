@@ -1,4 +1,5 @@
 import { CharacteristicMod } from "../Characteristic";
+import { ClassesEnum } from "../Classes";
 import { SavingThrows } from "../SavingThrows";
 
 export interface CharacterCharacteristic {
@@ -11,6 +12,31 @@ export interface CharacterCharacteristic {
 export interface IRequirement {
 	characteristic: string;
 	minValue: number;
+}
+export interface CharacterConstructor {
+	id: string;
+	name: string;
+	characteristic: CharacterCharacteristic[];
+	player?: string;
+	class?: ClassesEnum;
+	origin?: string;
+	alignment?: string;
+	height?: number;
+	weight?: number;
+	sex?: string;
+	age?: string;
+	hair?: string;
+	eyes?: string;
+	marks?: string;
+	level?: number;
+	label?: string;
+	hitPoint?: number;
+	dicesResults?: Array<number>;
+	hitDice?: number;
+	mainCharacteristic?: string[];
+	maxLevel?: number;
+	requirement?: Array<IRequirement> | null;
+	savingThrows?: SavingThrows;
 }
 
 export interface IAlignment {
@@ -44,7 +70,7 @@ export default class Character {
 	private readonly marks?: string;
 	private readonly level?: number;
 
-	constructor(character: Character) {
+	constructor(character: CharacterConstructor) {
 		this.id = character.id;
 		this.level = 1;
 		this.name = character.name;
@@ -71,7 +97,7 @@ export default class Character {
 		this.savingThrows = character.savingThrows;
 	}
 
-	canBeClass?(): boolean {
+	canBeClass(): boolean {
 		let canBeClass = true;
 		if (!this.requirement) {
 			return canBeClass;

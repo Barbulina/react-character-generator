@@ -13,7 +13,7 @@ export default function ClassSelector({
 }) {
 	const classesToSelect: AvailableClassType[] = getClassesList(characteristics);
 	const handleSelectClass = (classSelected: AvailableClassType) => {
-		if (classSelected.canBeClass && classSelected.canBeClass()) {
+		if (classSelected.canBeClass()) {
 			onSelectedClass(classSelected);
 		}
 	};
@@ -22,7 +22,7 @@ export default function ClassSelector({
 		<section className="class-selector">
 			<h3>CLASS</h3>
 			{classesToSelect.map((classToSelect) => {
-				const canBeSelected = classToSelect.canBeClass ? classToSelect.canBeClass() : false;
+				const canBeSelected = classToSelect.canBeClass();
 
 				return (
 					<div
